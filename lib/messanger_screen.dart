@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class MessangerScreen extends StatelessWidget {
@@ -59,432 +57,158 @@ class MessangerScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.grey[300]),
-              child: Row(
-                children: [
-                  IconButton(
-                      onPressed: () {}, icon: Icon(Icons.search_rounded)),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Search",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Container(
-                    width: 60,
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  bottom: 2.0, end: 3.3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 8,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.5,
-                        ),
-                        Text(
-                          "AbdElRahman bassel shahin",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Container(
-                    width: 60,
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  bottom: 2.0, end: 3.3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 8,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.5,
-                        ),
-                        Text(
-                          "AbdElRahman bassel shahin",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Container(
-                    width: 60,
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  bottom: 2.0, end: 3.3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 8,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.5,
-                        ),
-                        Text(
-                          "AbdElRahman bassel shahin",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Container(
-                    width: 60,
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  bottom: 2.0, end: 3.3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 8,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.5,
-                        ),
-                        Text(
-                          "AbdElRahman bassel shahin",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Container(
-                    width: 60,
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  bottom: 2.0, end: 3.3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 8,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.5,
-                        ),
-                        Text(
-                          "AbdElRahman bassel shahin",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Container(
-                    width: 60,
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  bottom: 2.0, end: 3.3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 8,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.5,
-                        ),
-                        Text(
-                          "AbdElRahman bassel shahin",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Container(
-                    width: 60,
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  bottom: 2.0, end: 3.3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 8,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.5,
-                        ),
-                        Text(
-                          "AbdElRahman bassel shahin",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.grey[300]),
+                child: Row(
                   children: [
-                    Row(
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  bottom: 2.0, end: 3.3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 8,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Abdelrahaman bassel shahin',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "message my freind  ,hello ,hi message",
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsetsDirectional.symmetric(
-                                            horizontal: 10.0),
-                                    child: Container(
-                                      width: 6,
-                                      height: 8,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                  ),
-                                  Text("2:00 pm"),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                    IconButton(
+                        onPressed: () {}, icon: Icon(Icons.search_rounded)),
                     SizedBox(
-                      height: 20,
+                      width: 15,
                     ),
-                    Row(
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  bottom: 2.0, end: 3.3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 8,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Abdelrahaman bassel shahin',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "message my freind  ,hello ,hi message",
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsetsDirectional.symmetric(
-                                            horizontal: 10.0),
-                                    child: Container(
-                                      width: 6,
-                                      height: 8,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                  ),
-                                  Text("2:00 pm"),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    Text(
+                      "Search",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 100,
+                child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => buildStoryItem(),
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        width: 10,
+                      );
+                    },
+                    itemCount: 10),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) => buildChatItem(),
+                  separatorBuilder: (context, index) {
+                    return SizedBox(
+                      height: 20,
+                    );
+                  },
+                  itemCount: 15),
+            ],
+          ),
         ),
       ),
     );
   }
+
+  Widget buildStoryItem() => Container(
+        width: 60,
+        child: Column(
+          children: [
+            Stack(
+              alignment: AlignmentDirectional.bottomEnd,
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundImage: NetworkImage(
+                      'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.only(bottom: 2.0, end: 3.3),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.green,
+                    radius: 8,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 5.5,
+            ),
+            Text(
+              "AbdElRahman bassel shahin",
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      );
+
+  Widget buildChatItem() => Row(
+        children: [
+          Stack(
+            alignment: AlignmentDirectional.bottomEnd,
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundImage: NetworkImage(
+                    'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.only(bottom: 2.0, end: 3.3),
+                child: CircleAvatar(
+                  backgroundColor: Colors.green,
+                  radius: 8,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Abdelrahaman bassel shahin',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "message my freind  ,hello ,hi message",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: 10.0),
+                      child: Container(
+                        width: 6,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                    Text("2:00 pm"),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
 }
