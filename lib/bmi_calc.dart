@@ -8,6 +8,8 @@ class BmiCalc extends StatefulWidget {
 }
 
 class _BmiCalcState extends State<BmiCalc> {
+  bool isMale = true;
+
   double sliderValue = 10.0;
   @override
   Widget build(BuildContext context) {
@@ -25,28 +27,36 @@ class _BmiCalcState extends State<BmiCalc> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18),
-                          color: Colors.grey[300]),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            child: Image.network(
-                                'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Male',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 30),
-                          )
-                        ],
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isMale = true;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            color:
+                                isMale ? Colors.blue[300] : Colors.grey[300]),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              child: Image.network(
+                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              'Male',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 30),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -54,28 +64,36 @@ class _BmiCalcState extends State<BmiCalc> {
                     width: 30,
                   ),
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isMale = false;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(18),
-                          color: Colors.redAccent[200]),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            child: Image.network(
-                                'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Female',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 30),
-                          )
-                        ],
+                          color: isMale ? Colors.grey[300] : Colors.blue[300],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              child: Image.network(
+                                  'https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png'),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              'Female',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 30),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
