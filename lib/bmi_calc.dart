@@ -267,7 +267,9 @@ class _BmiCalcState extends State<BmiCalc> {
                               ),
                               FloatingActionButton(
                                   onPressed: () {
-                                    age--;
+                                    setState(() {
+                                      age--;
+                                    });
                                   },
                                   child: Icon(
                                     Icons.remove,
