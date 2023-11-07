@@ -9,6 +9,8 @@ class BmiCalc extends StatefulWidget {
 
 class _BmiCalcState extends State<BmiCalc> {
   bool isMale = true;
+  int weight = 60;
+  int age = 27;
 
   double sliderValue = 10.0;
   @override
@@ -174,7 +176,7 @@ class _BmiCalcState extends State<BmiCalc> {
                               ),
                               SizedBox(height: 10),
                               Text(
-                                '69',
+                                '$weight',
                                 style: TextStyle(
                                     fontSize: 40, fontWeight: FontWeight.bold),
                               )
@@ -187,7 +189,11 @@ class _BmiCalcState extends State<BmiCalc> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      weight++;
+                                    });
+                                  },
                                   child: Icon(
                                     Icons.add,
                                     size: 40,
@@ -197,7 +203,11 @@ class _BmiCalcState extends State<BmiCalc> {
                                 width: 20,
                               ),
                               FloatingActionButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      weight--;
+                                    });
+                                  },
                                   child: Icon(
                                     Icons.remove,
                                     size: 40,
@@ -229,7 +239,7 @@ class _BmiCalcState extends State<BmiCalc> {
                               ),
                               SizedBox(height: 10),
                               Text(
-                                '58',
+                                '$age',
                                 style: TextStyle(
                                     fontSize: 40, fontWeight: FontWeight.bold),
                               )
@@ -242,7 +252,11 @@ class _BmiCalcState extends State<BmiCalc> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      age++;
+                                    });
+                                  },
                                   child: Icon(
                                     Icons.add,
                                     size: 40,
@@ -252,7 +266,9 @@ class _BmiCalcState extends State<BmiCalc> {
                                 width: 20,
                               ),
                               FloatingActionButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    age--;
+                                  },
                                   child: Icon(
                                     Icons.remove,
                                     size: 40,
