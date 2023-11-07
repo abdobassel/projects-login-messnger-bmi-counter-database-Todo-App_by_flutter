@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_mansour/bmi_calc.dart';
+import 'package:udemy_mansour/counter_screen.dart';
 import 'package:udemy_mansour/messanger_screen.dart';
 import 'package:udemy_mansour/users_screen.dart';
 
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: UsersScreen(),
+      home: BmiCalc(),
     );
   }
 }
