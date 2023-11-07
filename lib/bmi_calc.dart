@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_mansour/bmi_result.dart';
+import 'dart:math';
 
 class BmiCalc extends StatefulWidget {
   const BmiCalc({super.key});
@@ -189,6 +191,7 @@ class _BmiCalcState extends State<BmiCalc> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
+                                  heroTag: 'w++',
                                   onPressed: () {
                                     setState(() {
                                       weight++;
@@ -203,6 +206,7 @@ class _BmiCalcState extends State<BmiCalc> {
                                 width: 20,
                               ),
                               FloatingActionButton(
+                                  heroTag: 'w--',
                                   onPressed: () {
                                     setState(() {
                                       weight--;
@@ -252,6 +256,7 @@ class _BmiCalcState extends State<BmiCalc> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
+                                  heroTag: 'age+',
                                   onPressed: () {
                                     setState(() {
                                       age++;
@@ -266,6 +271,7 @@ class _BmiCalcState extends State<BmiCalc> {
                                 width: 20,
                               ),
                               FloatingActionButton(
+                                  heroTag: 'age-',
                                   onPressed: () {
                                     setState(() {
                                       age--;
@@ -292,7 +298,20 @@ class _BmiCalcState extends State<BmiCalc> {
             width: 400,
             height: 60,
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                double result = weight / pow(sliderValue / 100, 2);
+                int results = result.round();
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BmiResult(
+                        isMale: isMale,
+                        age: age,
+                        results: results,
+                      ),
+                    ));
+              },
               child: Text(
                 "Calc",
                 style: TextStyle(
