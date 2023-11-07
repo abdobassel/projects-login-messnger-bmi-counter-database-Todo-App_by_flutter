@@ -1,16 +1,5 @@
 import 'package:flutter/material.dart';
-
-class UserModel {
-  final int id;
-  final String name;
-  final String num;
-
-  UserModel({
-    required this.id,
-    required this.name,
-    required this.num,
-  });
-}
+import 'package:udemy_mansour/models/user/user_model.dart';
 
 class UsersScreen extends StatelessWidget {
   List<UserModel> users = [
