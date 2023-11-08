@@ -63,7 +63,9 @@ class _LoginState extends State<Login> {
                             });
                           },
                           isPassword: passwordShow,
-                          suffixIcon: Icons.remove_red_eye,
+                          suffixIcon: passwordShow
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                           controller: pwcontroller,
                           labeltext: "password",
                           validate: (value) {

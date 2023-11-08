@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Button default color blue now
 Widget DefaultButton({
   required String text,
   required final void Function()? function,
