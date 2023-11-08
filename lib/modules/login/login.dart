@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_mansour/shared/componontes/components.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   var mailcontroller = TextEditingController();
+
   var pwcontroller = TextEditingController();
+
+  var _formKey = GlobalKey<FormState>();
+
+  bool passwordShow = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,31 +38,43 @@ class Login extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                TextField(
-                  textAlign: TextAlign.center,
-                  controller: mailcontroller,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18)),
-                    label: Text('Email Adrress'),
-                    floatingLabelAlignment: FloatingLabelAlignment.center,
-                    prefix: Icon(Icons.email),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  controller: pwcontroller,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18)),
-                    label: Text('password'),
-                    prefix: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.remove_red_eye),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      DefaultTextForm(
+                          controller: mailcontroller,
+                          labeltext: "email",
+                          validate: (value) {
+                            if (value!.isEmpty) {
+                              return 'Email can not be empty';
+                            }
+                            return null;
+                          },
+                          type: TextInputType.emailAddress,
+                          prefix: Icons.email),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      DefaultTextForm(
+                          showPassfunc: () {
+                            setState(() {
+                              passwordShow = !passwordShow;
+                            });
+                          },
+                          isPassword: passwordShow,
+                          suffixIcon: Icons.remove_red_eye,
+                          controller: pwcontroller,
+                          labeltext: "password",
+                          validate: (value) {
+                            if (value!.isEmpty) {
+                              return 'password empty!!';
+                            }
+                            return null;
+                          },
+                          type: TextInputType.visiblePassword,
+                          prefix: Icons.lock),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -64,8 +86,10 @@ class Login extends StatelessWidget {
                     color: Colors.blue,
                     child: MaterialButton(
                       onPressed: () {
-                        print(pwcontroller.text);
-                        print(mailcontroller.text);
+                        if (_formKey.currentState!.validate()) {
+                          print(pwcontroller.text);
+                          print(mailcontroller.text);
+                        }
                       },
                       child: Text(
                         'Login',
@@ -74,11 +98,16 @@ class Login extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 DefaultButton(
+                  radius: 30,
                   function: () {
-                    print('hello');
+                    print('object');
                   },
-                  background: Colors.red,
+                  isUperCase: true,
+                  text: 'logout',
                   width: 200,
                 ),
                 SizedBox(
