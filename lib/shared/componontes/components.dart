@@ -37,8 +37,10 @@ Widget DefaultTextForm({
   bool isPassword = false,
   IconData? suffixIcon,
   Function()? showPassfunc,
+  Function()? onTap,
 }) =>
     TextFormField(
+      onTap: onTap,
       onChanged: onchange,
       obscureText: isPassword,
       onFieldSubmitted: onSubmit,
