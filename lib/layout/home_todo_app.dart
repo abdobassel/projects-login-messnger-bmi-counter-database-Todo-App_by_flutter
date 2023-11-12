@@ -20,6 +20,7 @@ class _TodoAppState extends State<TodoApp> {
   ];
   //data base
   Database? database;
+  List<Map> tasks = [];
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var _formstate = GlobalKey<FormState>();
   bool onBtmSheet = true;
@@ -45,7 +46,15 @@ class _TodoAppState extends State<TodoApp> {
       print('created table');
     }, onOpen: (db) {
       print('opened');
+      getDatabase(db).then((value) {
+        tasks = value;
+        print(tasks);
+      });
     });
+  }
+
+  Future<List<Map>> getDatabase(db) async {
+    return await db.rawQuery("select * from tasks");
   }
 
   Future insertToDataBase(
@@ -79,85 +88,96 @@ class _TodoAppState extends State<TodoApp> {
               time: timeController.text,
               title: titleConroller.text);
           if (onBtmSheet) {
-            scaffoldKey.currentState?.showBottomSheet(
-              (context) => Container(
-                padding: EdgeInsets.all(20),
-                color: Colors.grey[250],
-                child: Form(
-                  key: _formstate,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      DefaultTextForm(
-                          controller: titleConroller,
-                          labeltext: 'Title',
-                          validate: (value) {
-                            if (value!.isEmpty) {
-                              return 'not be  title empty please???';
-                            }
-                            return null;
-                          },
-                          type: TextInputType.text,
-                          prefix: Icons.title),
-                      SizedBox(
-                        height: 14,
+            scaffoldKey.currentState
+                ?.showBottomSheet(
+                  (context) => Container(
+                    padding: EdgeInsets.all(20),
+                    color: Colors.grey[250],
+                    child: Form(
+                      key: _formstate,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          DefaultTextForm(
+                              controller: titleConroller,
+                              labeltext: 'Title',
+                              validate: (value) {
+                                if (value!.isEmpty) {
+                                  return 'not be  title empty please???';
+                                }
+                                return null;
+                              },
+                              type: TextInputType.text,
+                              prefix: Icons.title),
+                          SizedBox(
+                            height: 14,
+                          ),
+                          DefaultTextForm(
+                              onTap: () {
+                                showTimePicker(
+                                        context: context,
+                                        initialTime: TimeOfDay.now())
+                                    .then((value) => {
+                                          if (value != null)
+                                            {
+                                              timeController.text = value
+                                                  .format(context)
+                                                  .toString(),
+                                            }
+                                        });
+                              },
+                              controller: timeController,
+                              labeltext: 'Time',
+                              validate: (value) {
+                                if (value!.isEmpty) {
+                                  return 'not be empty please???';
+                                }
+                                return null;
+                              },
+                              type: TextInputType.datetime,
+                              prefix: Icons.watch_later),
+                          SizedBox(
+                            height: 14,
+                          ),
+                          DefaultTextForm(
+                              onTap: () {
+                                showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime(2023, 12, 31))
+                                    .then((value) => {
+                                          if (value != null)
+                                            {
+                                              dateController.text =
+                                                  value.toString(),
+                                            }
+                                        });
+                              },
+                              controller: dateController,
+                              labeltext: 'Date',
+                              validate: (value) {
+                                if (value!.isEmpty) {
+                                  return 'DAte not be empty please???';
+                                }
+                                return null;
+                              },
+                              type: TextInputType.datetime,
+                              prefix: Icons.calendar_month_rounded),
+                        ],
                       ),
-                      DefaultTextForm(
-                          onTap: () {
-                            showTimePicker(
-                                    context: context,
-                                    initialTime: TimeOfDay.now())
-                                .then((value) => {
-                                      if (value != null)
-                                        {
-                                          timeController.text =
-                                              value.format(context).toString(),
-                                        }
-                                    });
-                          },
-                          controller: timeController,
-                          labeltext: 'Time',
-                          validate: (value) {
-                            if (value!.isEmpty) {
-                              return 'not be empty please???';
-                            }
-                            return null;
-                          },
-                          type: TextInputType.datetime,
-                          prefix: Icons.watch_later),
-                      SizedBox(
-                        height: 14,
-                      ),
-                      DefaultTextForm(
-                          onTap: () {
-                            showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime.now(),
-                                    lastDate: DateTime(2023, 12, 31))
-                                .then((value) => {
-                                      if (value != null)
-                                        {
-                                          dateController.text =
-                                              value.toString(),
-                                        }
-                                    });
-                          },
-                          controller: dateController,
-                          labeltext: 'Date',
-                          validate: (value) {
-                            if (value!.isEmpty) {
-                              return 'DAte not be empty please???';
-                            }
-                            return null;
-                          },
-                          type: TextInputType.datetime,
-                          prefix: Icons.calendar_month_rounded),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            );
+                )
+                .closed
+                .then(
+                  (value) => {
+                    setState(() {
+                      fabicon = Icons.edit;
+                    }),
+                    onBtmSheet = !onBtmSheet,
+                  },
+                );
             setState(() {
               fabicon = Icons.add;
             });
@@ -171,6 +191,9 @@ class _TodoAppState extends State<TodoApp> {
                 });
                 onBtmSheet = !onBtmSheet;
                 Navigator.pop(context);
+                titleConroller.clear();
+                timeController.clear();
+                dateController.clear();
               }
             }
           }
