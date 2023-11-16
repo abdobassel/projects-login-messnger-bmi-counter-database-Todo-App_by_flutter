@@ -4,6 +4,7 @@ import 'package:udemy_mansour/modules/archived_todo_tasks/archived.dart';
 import 'package:udemy_mansour/modules/done_tasks_todo/done_tasks_screen.dart';
 import 'package:udemy_mansour/modules/new_tasks_todo/new_tasks_screen.dart';
 import 'package:udemy_mansour/shared/componontes/components.dart';
+import 'package:udemy_mansour/shared/componontes/constants.dart';
 
 class TodoApp extends StatefulWidget {
   const TodoApp({super.key});
@@ -20,7 +21,7 @@ class _TodoAppState extends State<TodoApp> {
   ];
   //data base
   Database? database;
-  List<Map> tasks = [];
+  // List<Map> tasks = [];
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var _formstate = GlobalKey<FormState>();
   bool onBtmSheet = true;
@@ -49,6 +50,7 @@ class _TodoAppState extends State<TodoApp> {
       getDatabase(db).then((value) {
         tasks = value;
         print(tasks);
+        print("Got");
       });
     });
   }

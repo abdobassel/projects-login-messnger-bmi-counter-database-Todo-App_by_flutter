@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_mansour/shared/componontes/constants.dart';
 
 //Button default color blue now
 Widget DefaultButton({
@@ -59,4 +60,34 @@ Widget DefaultTextForm({
             ? IconButton(onPressed: showPassfunc, icon: Icon(suffixIcon))
             : null,
       ),
+    );
+
+Widget ItemTaskBuilder() => Row(
+      children: [
+        CircleAvatar(
+          radius: 40,
+          backgroundColor: Colors.blue,
+          child: Text(
+            'dffdf',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        /* Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'dffdf',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            ),
+            Text(
+              'dffdf',
+              style: TextStyle(color: Colors.grey[300], fontSize: 18),
+            ),
+          ],
+        ),*/
+      ],
     );
