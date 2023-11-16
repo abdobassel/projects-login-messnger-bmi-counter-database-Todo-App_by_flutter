@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 
-class MyCounter extends StatefulWidget {
+class MyCounter extends StatelessWidget {
   const MyCounter({super.key});
 
-  @override
-  State<MyCounter> createState() => _MyCounterState();
-}
-
-class _MyCounterState extends State<MyCounter> {
-  int counter = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +14,7 @@ class _MyCounterState extends State<MyCounter> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           IconButton(
-            onPressed: () {
-              setState(() {
-                counter++;
-              });
-            },
+            onPressed: () {},
             icon: Icon(
               Icons.add,
               color: Colors.grey,
@@ -34,16 +24,12 @@ class _MyCounterState extends State<MyCounter> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              '$counter',
+              '',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
           ),
           IconButton(
-            onPressed: () {
-              setState(() {
-                counter--;
-              });
-            },
+            onPressed: () {},
             icon: Icon(
               Icons.minimize,
             ),
