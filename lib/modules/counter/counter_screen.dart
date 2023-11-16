@@ -8,7 +8,6 @@ class MyCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CounterCubit counterCubit = BlocProvider.of(context);
     return BlocProvider(
       create: (context) => CounterCubit(InitCounterState()),
       child: BlocConsumer<CounterCubit, CounterStates>(
@@ -24,7 +23,7 @@ class MyCounter extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    counterCubit.plus_counter();
+                    CounterCubit.get(context).plus_counter();
                   },
                   icon: Icon(
                     Icons.add,
@@ -35,13 +34,13 @@ class MyCounter extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
-                    '',
+                    '${CounterCubit.get(context).counter}',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
                 IconButton(
                   onPressed: () {
-                    counterCubit.minuscounter();
+                    CounterCubit.get(context).minuscounter();
                   },
                   icon: Icon(
                     Icons.minimize,
