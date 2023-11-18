@@ -35,7 +35,16 @@ class TodoApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AppCubit(AppInitState())..createDatabase(),
       child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is AppInsertDatabaseState) {
+            Navigator.of(context);
+
+            print('object');
+            titleConroller.clear();
+            timeController.clear();
+            dateController.clear();
+          }
+        },
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
@@ -44,10 +53,14 @@ class TodoApp extends StatelessWidget {
                 AppBar(title: Text('${cubit.titleScreen[cubit.currentindex]}')),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                cubit.insertToDataBase(
-                    date: dateController.text,
-                    time: timeController.text,
-                    title: titleConroller.text);
+                if (_formstate.currentState != null) {
+                  if (_formstate.currentState!.validate()) {
+                    cubit.insertToDataBase(
+                        date: dateController.text,
+                        time: timeController.text,
+                        title: titleConroller.text);
+                  }
+                }
                 if (cubit.onBtmSheet) {
                   scaffoldKey.currentState
                       ?.showBottomSheet(
@@ -131,24 +144,10 @@ class TodoApp extends StatelessWidget {
                         ),
                       )
                       .closed
-                      .then(
-                        (value) => {
-                          cubit.changeBottomSheet(
-                              isShow: false, icon: Icons.edit),
-                        },
-                      );
-
-                  cubit.changeBottomSheet(isShow: true, icon: Icons.edit);
-                } else {
-                  if (_formstate.currentState != null) {
-                    if (_formstate.currentState!.validate()) {
-                      cubit.changeBottomSheet(isShow: true, icon: Icons.add);
-                      Navigator.pop(context);
-                      titleConroller.clear();
-                      timeController.clear();
-                      dateController.clear();
-                    }
-                  }
+                      .then((value) {
+                    cubit.changeBottomSheet(isShow: true, icon: Icons.edit);
+                  });
+                  cubit.changeBottomSheet(isShow: false, icon: Icons.add);
                 }
               },
               child: Icon(cubit.fabicon),

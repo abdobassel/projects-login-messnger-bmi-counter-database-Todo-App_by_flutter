@@ -62,32 +62,45 @@ Widget DefaultTextForm({
       ),
     );
 
-Widget ItemTaskBuilder() => Row(
+Widget ItemTaskBuilder({
+  required String txt,
+  required String date,
+  required String time,
+}) =>
+    Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CircleAvatar(
           radius: 40,
           backgroundColor: Colors.blue,
           child: Text(
-            'dffdf',
+            '$time',
             style: TextStyle(color: Colors.white),
           ),
         ),
         SizedBox(
           width: 20,
         ),
-        /* Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'dffdf',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            ),
-            Text(
-              'dffdf',
-              style: TextStyle(color: Colors.grey[300], fontSize: 18),
-            ),
-          ],
-        ),*/
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                '$txt',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                '$date',
+                style: TextStyle(color: Colors.grey[300], fontSize: 18),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
       ],
     );
