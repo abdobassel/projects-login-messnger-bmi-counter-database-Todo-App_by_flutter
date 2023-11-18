@@ -4,6 +4,7 @@ import 'package:udemy_mansour/modules/archived_todo_tasks/archived.dart';
 import 'package:udemy_mansour/modules/done_tasks_todo/done_tasks_screen.dart';
 import 'package:udemy_mansour/modules/new_tasks_todo/new_tasks_screen.dart';
 import 'package:udemy_mansour/shared/bloc_app/states.dart';
+import 'package:sqflite/sqflite.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit(super.initialState);
@@ -21,5 +22,68 @@ class AppCubit extends Cubit<AppStates> {
   void changeIndex(int index) {
     currentindex = index;
     emit(AppChangeBottomNavBarState());
+  }
+
+  Database? database;
+  List<Map> tasks = [];
+
+  void createDatabase() {
+    openDatabase('todo.db', version: 1, onCreate: (db, version) async {
+      db.execute(
+          'create table tasks(id integer primary key, title text, date text, time text, status text)');
+      print('created table');
+    }, onOpen: (db) {
+      print('opened');
+      getDatabase(db).then((value) {
+        tasks = value;
+        print(tasks);
+        emit(AppGetDatabaseState());
+      });
+    }).then((value) {
+      database = value;
+      print('Created datebase');
+      emit(AppCreateDatabaseState());
+    });
+  }
+
+  Future<List<Map>> getDatabase(db) async {
+    return await db.rawQuery("select * from tasks");
+  }
+
+  bool onBtmSheet = true;
+  IconData fabicon = Icons.edit;
+
+  void changeBottomSheet({
+    required bool isShow,
+    required IconData icon,
+  }) {
+    onBtmSheet = isShow;
+    fabicon = icon;
+    emit(AppChangeBottomSheetState());
+  }
+
+  insertToDataBase(
+      {required String title,
+      required String date,
+      required String time}) async {
+    return await database?.transaction((txn) async {
+      try {
+        txn
+            .rawInsert(
+                'INSERT INTO tasks (title,date,time,status) VALUES ("$title","$date","$time","NewTask")')
+            .then((value) {
+          print(value);
+          emit(AppInsertDatabaseState());
+          getDatabase(database).then((value) {
+            tasks = value;
+
+            emit(AppGetDatabaseState());
+          });
+        });
+        print('inserted database');
+      } catch (error) {
+        print('error is ${error.toString()}');
+      }
+    });
   }
 }

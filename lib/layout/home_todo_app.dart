@@ -13,12 +13,11 @@ class TodoApp extends StatelessWidget {
   TodoApp({super.key});
 
   //data base
-  Database? database;
+
   // List<Map> tasks = [];
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var _formstate = GlobalKey<FormState>();
-  bool onBtmSheet = true;
-  IconData fabicon = Icons.edit;
+
   var titleConroller = TextEditingController();
   var timeController = TextEditingController();
   var dateController = TextEditingController();
@@ -31,49 +30,10 @@ class TodoApp extends StatelessWidget {
   }
   */
 
-  void createDatabase() async {
-    database = await openDatabase('todo.db', version: 1,
-        onCreate: (db, version) async {
-      db.execute(
-          'create table tasks(id integer primary key, title text, date text, time text, status text)');
-      print('created table');
-    }, onOpen: (db) {
-      print('opened');
-      getDatabase(db).then((value) {
-        tasks = value;
-        print(tasks);
-        print("Got");
-      });
-    });
-  }
-
-  Future<List<Map>> getDatabase(db) async {
-    return await db.rawQuery("select * from tasks");
-  }
-
-  Future insertToDataBase(
-      {required String title,
-      required String date,
-      required String time}) async {
-    return await database?.transaction((txn) async {
-      try {
-        txn
-            .rawInsert(
-                'INSERT INTO tasks (title,date,time,status) VALUES ("$title","$date","$time","NewTask")')
-            .then((value) => {
-                  print(value),
-                });
-        print('inserted database');
-      } catch (error) {
-        print('error is ${error.toString()}');
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(AppInitState()),
+      create: (context) => AppCubit(AppInitState())..createDatabase(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -84,11 +44,11 @@ class TodoApp extends StatelessWidget {
                 AppBar(title: Text('${cubit.titleScreen[cubit.currentindex]}')),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                insertToDataBase(
+                cubit.insertToDataBase(
                     date: dateController.text,
                     time: timeController.text,
                     title: titleConroller.text);
-                if (onBtmSheet) {
+                if (cubit.onBtmSheet) {
                   scaffoldKey.currentState
                       ?.showBottomSheet(
                         (context) => Container(
@@ -173,24 +133,16 @@ class TodoApp extends StatelessWidget {
                       .closed
                       .then(
                         (value) => {
-                          //   setState(() {
-                          //   fabicon = Icons.edit;
-                          //}),
-                          //onBtmSheet = !onBtmSheet,
+                          cubit.changeBottomSheet(
+                              isShow: false, icon: Icons.edit),
                         },
                       );
-                  //   setState(() {
-                  //   fabicon = Icons.add;
-                  // });
 
-                  onBtmSheet = !onBtmSheet;
+                  cubit.changeBottomSheet(isShow: true, icon: Icons.edit);
                 } else {
                   if (_formstate.currentState != null) {
                     if (_formstate.currentState!.validate()) {
-                      //     setState(() {
-                      //     fabicon = Icons.edit;
-                      // });
-                      onBtmSheet = !onBtmSheet;
+                      cubit.changeBottomSheet(isShow: true, icon: Icons.add);
                       Navigator.pop(context);
                       titleConroller.clear();
                       timeController.clear();
@@ -199,7 +151,7 @@ class TodoApp extends StatelessWidget {
                   }
                 }
               },
-              child: Icon(fabicon),
+              child: Icon(cubit.fabicon),
             ),
             bottomNavigationBar: BottomNavigationBar(
                 iconSize: 40,

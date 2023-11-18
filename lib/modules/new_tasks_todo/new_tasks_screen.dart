@@ -12,7 +12,9 @@ class New_Tasks_ToDo extends StatefulWidget {
 class _New_Tasks_ToDoState extends State<New_Tasks_ToDo> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container();
+
+    /* Container(
       child: ListView.separated(
         itemBuilder: (context, index) {
           return ItemTaskBuilder();
@@ -29,6 +31,6 @@ class _New_Tasks_ToDoState extends State<New_Tasks_ToDo> {
           );
         },
       ),
-    );
+    );*/
   }
 }
