@@ -25,20 +25,19 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Database? database;
-  List<Map> tasks = [];
 
-  void createDatabase() {
+  List<Map> newTasks = [];
+  List<Map> archiveTasks = [];
+  List<Map> doneTasks = [];
+
+  void createDatabase() async {
     openDatabase('todo.db', version: 1, onCreate: (db, version) async {
       db.execute(
           'create table tasks(id integer primary key, title text, date text, time text, status text)');
       print('created table');
     }, onOpen: (db) {
       print('opened');
-      getDatabase(db).then((value) {
-        tasks = value;
-        print(tasks);
-        emit(AppGetDatabaseState());
-      });
+      getDatabase(db);
     }).then((value) {
       database = value;
       print('Created datebase');
@@ -46,18 +45,32 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  Future<List<Map>> getDatabase(db) async {
-    List newTasks = [];
-    List archiveTasks = [];
-    List doneTasks = [];
+  void getDatabase(db) {
+    newTasks = [];
+    archiveTasks = [];
+    doneTasks = [];
 
-    return await db.rawQuery("select * from tasks");
+    db!.rawQuery("select * from tasks").then((value) {
+      print(value);
+      value.forEach((element) {
+        if (element['status'] == 'NewTask') {
+          newTasks.add(element);
+        } else if (element['status'] == 'done') {
+          doneTasks.add(element);
+        } else {
+          archiveTasks.add(element);
+        }
+      });
+
+      emit(AppGetDatabaseState());
+    });
   }
 
   // update logic
   void updateDatabase({required String status, required int id}) async {
-    database!.rawUpdate('UPDATE tasks SET status = ? WHERE id = ?',
+    database?.rawUpdate('UPDATE tasks SET status = ? WHERE id = ?',
         ['$status', id]).then((value) {
+      getDatabase(database);
       emit(AppUpdateDatabaseState());
     });
   }
@@ -74,7 +87,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppChangeBottomSheetState());
   }
 
-  insertToDataBase(
+  void insertToDataBase(
       {required String title,
       required String date,
       required String time}) async {
@@ -86,11 +99,7 @@ class AppCubit extends Cubit<AppStates> {
             .then((value) {
           print(value);
           emit(AppInsertDatabaseState());
-          getDatabase(database).then((value) {
-            tasks = value;
-
-            emit(AppGetDatabaseState());
-          });
+          getDatabase(database);
         });
         print('inserted database');
       } catch (error) {

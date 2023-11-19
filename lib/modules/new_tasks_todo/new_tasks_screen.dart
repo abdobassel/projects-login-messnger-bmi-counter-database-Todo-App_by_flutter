@@ -16,7 +16,7 @@ class _New_Tasks_ToDoState extends State<New_Tasks_ToDo> {
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       builder: (context, state) {
-        var tasks = AppCubit.get(context).tasks;
+        var tasks = AppCubit.get(context).newTasks;
         return Container(
           padding: EdgeInsets.all(18),
           child: ListView.separated(
