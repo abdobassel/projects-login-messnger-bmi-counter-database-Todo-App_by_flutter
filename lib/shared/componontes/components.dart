@@ -71,62 +71,68 @@ Widget ItemTaskBuilder(
   required int id,
   required String status,
 }) =>
-    Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundColor: Colors.blue,
-          child: Text(
-            '$time',
-            style: TextStyle(color: Colors.white),
+    Dismissible(
+      key: Key('$id'),
+      onDismissed: (direction) {
+        AppCubit.get(context).deleteDatabase(id: id);
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          CircleAvatar(
+            radius: 40,
+            backgroundColor: Colors.blue,
+            child: Text(
+              '$time',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
-        ),
-        SizedBox(
-          width: 20,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Text(
-                '$txt',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text(
-                '$date',
-                style: TextStyle(color: Colors.grey[300], fontSize: 18),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+          SizedBox(
+            width: 20,
           ),
-        ),
-        SizedBox(
-          width: 15,
-        ),
-        IconButton(
-          onPressed: () {
-            AppCubit.get(context).updateDatabase(status: 'done', id: id);
-          },
-          icon: Icon(Icons.check_circle),
-          color: Colors.green,
-          iconSize: 30,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        IconButton(
-          onPressed: () {
-            AppCubit.get(context).updateDatabase(status: 'archived', id: id);
-          },
-          icon: Icon(Icons.archive),
-          color: Colors.black54,
-          iconSize: 30,
-        )
-      ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(
+                  '$txt',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  '$date',
+                  style: TextStyle(color: Colors.grey[300], fontSize: 18),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          IconButton(
+            onPressed: () {
+              AppCubit.get(context).updateDatabase(status: 'done', id: id);
+            },
+            icon: Icon(Icons.check_circle),
+            color: Colors.green,
+            iconSize: 30,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          IconButton(
+            onPressed: () {
+              AppCubit.get(context).updateDatabase(status: 'archived', id: id);
+            },
+            icon: Icon(Icons.archive),
+            color: Colors.black54,
+            iconSize: 30,
+          )
+        ],
+      ),
     );
