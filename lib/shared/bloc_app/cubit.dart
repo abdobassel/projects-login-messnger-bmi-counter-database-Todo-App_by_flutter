@@ -47,7 +47,19 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Future<List<Map>> getDatabase(db) async {
+    List newTasks = [];
+    List archiveTasks = [];
+    List doneTasks = [];
+
     return await db.rawQuery("select * from tasks");
+  }
+
+  // update logic
+  void updateDatabase({required String status, required int id}) async {
+    database!.rawUpdate('UPDATE tasks SET status = ? WHERE id = ?',
+        ['$status', id]).then((value) {
+      emit(AppUpdateDatabaseState());
+    });
   }
 
   bool onBtmSheet = true;

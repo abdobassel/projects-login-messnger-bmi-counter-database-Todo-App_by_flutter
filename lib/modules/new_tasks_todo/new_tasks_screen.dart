@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_mansour/shared/bloc_app/cubit.dart';
 import 'package:udemy_mansour/shared/bloc_app/states.dart';
 import 'package:udemy_mansour/shared/componontes/components.dart';
-import 'package:udemy_mansour/shared/componontes/constants.dart';
 
 class New_Tasks_ToDo extends StatefulWidget {
   const New_Tasks_ToDo({super.key});
@@ -19,10 +18,12 @@ class _New_Tasks_ToDoState extends State<New_Tasks_ToDo> {
       builder: (context, state) {
         var tasks = AppCubit.get(context).tasks;
         return Container(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(18),
           child: ListView.separated(
             itemBuilder: (context, index) {
-              return ItemTaskBuilder(
+              return ItemTaskBuilder(context,
+                  id: tasks[index]["id"],
+                  status: tasks[index]['status'],
                   txt: tasks[index]['title'],
                   date: tasks[index]['date'],
                   time: tasks[index]['time']);

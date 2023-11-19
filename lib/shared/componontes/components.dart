@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_mansour/shared/bloc_app/cubit.dart';
 import 'package:udemy_mansour/shared/componontes/constants.dart';
 
 //Button default color blue now
@@ -62,10 +63,13 @@ Widget DefaultTextForm({
       ),
     );
 
-Widget ItemTaskBuilder({
+Widget ItemTaskBuilder(
+  context, {
   required String txt,
   required String date,
   required String time,
+  required int id,
+  required String status,
 }) =>
     Row(
       mainAxisSize: MainAxisSize.min,
@@ -102,5 +106,27 @@ Widget ItemTaskBuilder({
             ],
           ),
         ),
+        SizedBox(
+          width: 15,
+        ),
+        IconButton(
+          onPressed: () {
+            AppCubit.get(context).updateDatabase(status: 'done', id: id);
+          },
+          icon: Icon(Icons.check_circle),
+          color: Colors.green,
+          iconSize: 30,
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        IconButton(
+          onPressed: () {
+            AppCubit.get(context).updateDatabase(status: 'archived', id: id);
+          },
+          icon: Icon(Icons.archive),
+          color: Colors.black54,
+          iconSize: 30,
+        )
       ],
     );
